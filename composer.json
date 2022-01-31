@@ -1,0 +1,22 @@
+{
+  "name": "jhse-labs/mezzio-twig-viewhelper",
+  "type": "library",
+  "description": "Bridges laminas view helpers to the twig environment when running a mezzio application",
+  "keywords": [
+    "mezzio",
+    "laminas",
+    "viewhelper",
+    "twig"
+  ],
+  "license": "MIT",
+  "require": {
+    "php": "^7.4 || ~8.0.0 || ~8.1.0",
+    "mezzio/mezzio-laminasviewrenderer": "^2.4",
+    "mezzio/mezzio-twigrenderer": "^2.9"
+  },
+  "autoload": {
+    "psr-4": {
+      "JhseLabs\\MezzioTwigViewHelper\\": "src/"
+    }
+  }
+}
