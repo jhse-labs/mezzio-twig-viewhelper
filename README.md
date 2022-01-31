@@ -10,7 +10,7 @@ Installation
 
 Install the library using [composer](https://getcomposer.org):
 
-    php composer.phar require jhse-labs/mezzio-twig-viewhelper
+    composer require jhse-labs/mezzio-twig-viewhelper
 
 Enable the module in config.php:
 
