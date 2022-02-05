@@ -40,7 +40,8 @@ class ConfigProvider
     {
         return [
             'factories' => [
-                \Twig\Environment::class => View\Twig\EnvironmentExtensionFactory::class,
+				// add this folloeing linr to your local ConfigProvider class
+				// \Twig\Environment::class => View\Twig\EnvironmentExtensionFactory::class,
                 View\Twig\BridgeExtension::class => View\Twig\BridgeExtensionFactory::class,
             ],
         ];
