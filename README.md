@@ -21,22 +21,7 @@ $aggregator = new ConfigAggregator([
     \JhseLabs\MezzioTwigViewHelper\ConfigProvider::class,
     ...
 ```
-And register the EnvironmentExtensionFactory in your local ConfigProvider:
-
-```php
-<?php
-
-    public function getDependencies(): array
-    {
-        return [
-            'factories' => [
-                ...
-                \Twig\Environment::class => \JhseLabs\MezzioTwigViewHelper\View\Twig\EnvironmentExtensionFactory::class,
-                ...
-            ],
-        ];
-    }
-```
+The laminas view helper support is added to your Twig\Environment instance automatically via registering a delegator factory.
 
 Usage
 -----
@@ -44,9 +29,9 @@ Usage
 Within your Twig templates you can now call all your laminas view helpers:
 ```html
 <head>
-{{ headTitle('Login Page') }}
+    {{ headTitle('Login Page') }}
 </head>
 <body>
-{{ form(loginForm) }}
+    {{ form(loginForm) }}
 </body>
 ```

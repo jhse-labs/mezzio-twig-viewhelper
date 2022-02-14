@@ -27,21 +27,23 @@ declare(strict_types=1);
 
 namespace JhseLabs\MezzioTwigViewHelper\View\Twig;
 
+use Interop\Container\ContainerInterface;
+use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Laminas\View\HelperPluginManager;
-use Mezzio\Twig\TwigEnvironmentFactory;
-use Psr\Container\ContainerInterface;
 use Twig\Environment;
 use Twig\TwigFunction;
 
-class EnvironmentExtensionFactory extends TwigEnvironmentFactory
+class EnvironmentExtensionDelegatorFactory implements DelegatorFactoryInterface
 {
     /**
      * Returns a Twig\Environment instance that is capable of calling all registered
      * Laminas\View helper classes by bridging twig function calls to Laminas\View\HelperPluginManager
      */
-    public function __invoke(ContainerInterface $container): Environment
+    public function __invoke(ContainerInterface $container, $name, callable $callback, ?array $options = null): Environment
     {
-        $environment = parent::__invoke($container);
+
+        $environment = $callback();
+        assert($environment instanceof Environment);
 
         /** @var HelperPluginManager $helperPluginManager */
         $helperPluginManager = $container->get(HelperPluginManager::class);
