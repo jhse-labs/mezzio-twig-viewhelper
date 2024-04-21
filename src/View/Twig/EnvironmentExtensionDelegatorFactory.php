@@ -52,11 +52,22 @@ class EnvironmentExtensionDelegatorFactory implements DelegatorFactoryInterface
         $environment->registerUndefinedFunctionCallback(
             function ($name) use ($helperPluginManager) {
                 if ($helperPluginManager->has($name)) {
+
+                    $helper = $helperPluginManager->get($name);
+
+                    $callable = function (...$args) use ($helper) {
+                        return $helper->__invoke(...$args);
+                    };
+
                     return new TwigFunction(
                         $name,
-                        sprintf('$this->env->getExtension("%s")->getViewHelper("%s")->__invoke', BridgeExtension::class, $name),
-                        ['is_safe' => ['all']]
+                        $callable,
+                        [
+                            'is_safe' => ['all'],
+                            'is_variadic' => true,
+                        ]
                     );
+
                 }
                 return false;
             }
