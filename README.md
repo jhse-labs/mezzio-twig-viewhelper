@@ -35,3 +35,8 @@ Within your Twig templates you can now call all your laminas view helpers:
     {{ form(loginForm) }}
 </body>
 ```
+
+Since version 1.1.0 it is possible to call laminas view helpers with named arguments:
+```html
+{{ form(form=loginForm, method='POST') }}
+```
