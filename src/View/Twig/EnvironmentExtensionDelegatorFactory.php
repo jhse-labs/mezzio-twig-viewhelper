@@ -27,7 +27,7 @@ declare(strict_types=1);
 
 namespace JhseLabs\MezzioTwigViewHelper\View\Twig;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\ServiceManager\Factory\DelegatorFactoryInterface;
 use Laminas\View\HelperPluginManager;
 use Twig\Environment;
@@ -37,7 +37,8 @@ class EnvironmentExtensionDelegatorFactory implements DelegatorFactoryInterface
 {
     /**
      * Returns a Twig\Environment instance that is capable of calling all registered
-     * Laminas\View helper classes by bridging twig function calls to Laminas\View\HelperPluginManager
+     * Laminas\View helper classes by wrapping twig function calls into a callable and bridging
+     * them to Laminas\View\HelperPluginManager
      */
     public function __invoke(ContainerInterface $container, $name, callable $callback, ?array $options = null): Environment
     {
@@ -72,9 +73,6 @@ class EnvironmentExtensionDelegatorFactory implements DelegatorFactoryInterface
                 return false;
             }
         );
-
-        // register BridgeExtension within twig environment
-        $environment->addExtension($container->get(BridgeExtension::class));
 
         return $environment;
     }

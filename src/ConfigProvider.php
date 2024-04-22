@@ -39,9 +39,6 @@ class ConfigProvider
     public function getDependencies(): array
     {
         return [
-            'factories' => [
-                View\Twig\BridgeExtension::class => View\Twig\BridgeExtensionFactory::class,
-            ],
             'delegators' => [
                 \Twig\Environment::class => [
                     View\Twig\EnvironmentExtensionDelegatorFactory::class,
